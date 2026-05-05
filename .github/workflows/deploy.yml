@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Docker image
+      run: docker build -t sas-rag-assistant:latest .
+    
+    - name: Run tests in container
+      run: docker run --rm sas-rag-assistant:latest pytest tests/
+    
+    # Add your deployment steps here
+    # - name: Push to registry
+    # - name: Deploy to cloud

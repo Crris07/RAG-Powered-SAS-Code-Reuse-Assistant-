@@ -1,0 +1,3 @@
+Requirement: Generate ADSL (subject-level analysis dataset) with safety flags for a clinical trial
+Context: We need demographics, baseline characteristics, and safety flag variables
+Expected output: SAS data step that reads raw data and creates analysis dataset with derived variables

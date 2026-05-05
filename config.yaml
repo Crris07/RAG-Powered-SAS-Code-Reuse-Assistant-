@@ -1,0 +1,107 @@
+# Configuration for SAS RAG Assistant
+
+# Application Settings
+app:
+  name: "SAS RAG Assistant"
+  version: "0.1.0"
+  environment: "development"  # development, staging, production
+  debug: true
+  log_level: "INFO"
+
+# Data Settings
+data:
+  corpus_path: "./data/corpus/raw"
+  processed_path: "./data/corpus/processed"
+  vector_db_path: "./data/vector_db"
+  embeddings_path: "./data/embeddings"
+  metadata_file: "./data/corpus/metadata.json"
+
+# Chunking Settings
+chunking:
+  chunk_size: 500  # tokens
+  chunk_overlap: 100
+  strategy: "semantic"  # semantic, line-based, procedure-based
+
+# Embeddings Settings
+embeddings:
+  model: "intfloat/e5-small-v2"  # Sentence-transformer model
+  dimension: 384
+  batch_size: 32
+  cache_embeddings: true
+
+# Vector Database Settings
+vector_db:
+  type: "chromadb"
+  chromadb:
+    persistence_dir: "./data/vector_db"
+    collection_name: "sas_code"
+
+# RAG Settings
+rag:
+  top_k: 3
+  similarity_threshold: 0.5
+  vector_weight: 0.7
+  keyword_weight: 0.3
+  reranker_model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+# LLM Settings
+llm:
+  provider: "demo"  # demo, openai, claude, codellama
+  openai:
+    model: "gpt-4"
+    temperature: 0.2
+    max_tokens: 1024
+    api_key: "${OPENAI_API_KEY}"
+  claude:
+    model: "claude-3-sonnet-20240229"
+    temperature: 0.2
+    max_tokens: 1024
+    api_key: "${ANTHROPIC_API_KEY}"
+  codellama:
+    model_path: "./models/codellama-34b-instruct"
+    temperature: 0.2
+    max_tokens: 1024
+
+# Prompt Templates
+prompts:
+  adaptation_system: |
+    You are an expert SAS programmer. Your task is to adapt existing SAS code
+    for a new clinical trial requirement. Maintain the structure and logic,
+    but update variable names, study-specific parameters, and data references.
+  
+  adaptation_user: |
+    Given the following existing SAS code:
+    
+    {context}
+    
+    Adapt this code for the new requirement:
+    {requirement}
+    
+    Provide the adapted SAS code with clear comments. Ensure the code is
+    production-ready and follows best practices.
+
+# API Settings
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: true
+  cors_origins: ["*"]
+
+# Web UI Settings
+web:
+  title: "SAS RAG Assistant"
+  layout: "wide"
+  theme: "light"
+
+# Testing Settings
+testing:
+  test_data_path: "./tests/fixtures"
+  mock_api_responses: true
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/app.log"
+  max_bytes: 10485760
+  backup_count: 5
