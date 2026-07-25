@@ -212,7 +212,7 @@ python -m pytest tests -v
 - Add audit trails for generated suggestions
 - Add authentication and authorization for deployed use
 - Add a human review workflow before code reuse
-- Evaluate approved local code models for regulated environments
+- Evaluate approved local code models for regulated environment
 
 ## Documentation
 
