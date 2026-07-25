@@ -10,7 +10,6 @@ The core problem is simple: programmers often rewrite ADSL, ADAE, ADLB, TLF, lis
 
 Screenshots are included as demo evidence for the current working Streamlit UI.
 
-## Prototype Screenshots
 
 ### Search
 
@@ -35,6 +34,7 @@ The search view retrieves SAS snippets from the synthetic corpus and ranks them 
 - FastAPI endpoints for health checks, retrieval, and generation
 - Streamlit interface for searching the corpus and generating SAS suggestions
 - Configurable LLM providers for OpenAI, Claude, or a local CodeLlama model
+
 
 ## How It Works
 
